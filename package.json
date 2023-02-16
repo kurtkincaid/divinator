@@ -1,6 +1,11 @@
 {
   "name": "divinator",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kurtkincaid/divinator.git"
+  },
+  "homepage": "https://github.com/kurtkincaid/divinator",
   "description": "Relatively simple library bringing multiple outlier/anomaly detection algorithms together in one place.",
   "main": "index.js",
   "scripts": {
