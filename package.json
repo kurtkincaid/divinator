@@ -1,0 +1,25 @@
+{
+  "name": "divinator",
+  "version": "1.0.0",
+  "description": "Relatively simple library bringing multiple outlier/anomaly detection algorithms together in one place.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "anomaly",
+    "outlier",
+    "zscore",
+    "z-score",
+    "modified-z-score",
+    "modified-zscore",
+    "iqr",
+    "interquartile-range",
+    "statistics"
+  ],
+  "author": "Kurt Kincaid <kurt.kincaid@gmail.com>",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "simple-statistics": "^7.8.2"
+  }
+}
