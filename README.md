@@ -67,13 +67,24 @@ into your code. For more information on the algorithms themselves, I refer you t
   - [Install](#install)
   - [Usage](#usage)
     - [iqr](#iqr)
+  - [iqr](#iqr-1)
+- [Q1 - _t_ or is greater than Q3 + _t_, that value is a possible anomaly. The default multiplier is 1.5, though a custom](#q1---t-or-is-greater-than-q3--t-that-value-is-a-possible-anomaly-the-default-multiplier-is-15-though-a-custom)
     - [zscore](#zscore)
+- [data point in relation to the rest of the sample. Assuming a normal data distribution, ~ 99.7% of your data should](#data-point-in-relation-to-the-rest-of-the-sample-assuming-a-normal-data-distribution--997-of-your-data-should)
+  - [zscore](#zscore-1)
     - [modifiedZscore](#modifiedzscore)
+- [when using modifiedZscore is 3.5. As with the other functions, a value other than the default may be passed as a second](#when-using-modifiedzscore-is-35-as-with-the-other-functions-a-value-other-than-the-default-may-be-passed-as-a-second)
+  - [modifiedZscore](#modifiedzscore-1)
     - [all](#all)
+- [object. Any or all of the functions may be included; any functions not referenced in the configuration object will](#object-any-or-all-of-the-functions-may-be-included-any-functions-not-referenced-in-the-configuration-object-will)
+  - [all](#all-1)
     - [version](#version)
+  - [version](#version-1)
     - [patterns](#patterns)
     - [xbar](#xbar)
   - [Input and Feedback](#input-and-feedback)
+- [and would like to see them included, please let me know.](#and-would-like-to-see-them-included-please-let-me-know)
+- [Input and Feedback](#input-and-feedback-1)
 
 ## Install
 
@@ -89,18 +100,31 @@ At the top of your script, load Divinator.
 const divinator = require( "divinator" );
 ```
 
+<<<<<<< HEAD
 ### iqr
+=======
+## iqr
+>>>>>>> 45d48a0a9199dc6e6421f07838f402ef3bad8a8f
 
 ```js
 divinator.iqr( <array>, <optional multiplication factor> );
 ```
 
+<<<<<<< HEAD
 The interquartile range (IQR) is used for measuring the degree of dispersion of your data. The IQR specifically
 is the 75th percentile (Q3) minus the 25th percentile (Q1). Thus, IQR = Q3 - Q1. The middle 50% of your data
 will fall between Q1 and Q3.
 
 For the purpose of anomaly detection, a factor of 1.5 * IQR is used for our threshold, _t_. If a given value is less than
 Q1 - _t_ or is greater than Q3 + _t_, that value is a possible anomaly. The default multiplier is 1.5, though a custom
+=======
+The interquartile range (IQR) is used for measuring the degree of dispersion of your data. The IQR specifically 
+is the 75th percentile (Q3) minus the 25th percentile (Q1). Thus, IQR = Q3 - Q1. The middle 50% of your data 
+will fall between Q1 and Q3. 
+
+For the purpose of anomaly detection, a factor of 1.5 * IQR is used for our threshold, _t_. If a given value is less than 
+Q1 - _t_ or is greater than Q3 + _t_, that value is a possible anomaly. The default multiplier is 1.5, though a custom 
+>>>>>>> 45d48a0a9199dc6e6421f07838f402ef3bad8a8f
 value may be passed as a second parameter to the function.
 
 ```js
@@ -117,10 +141,17 @@ let response2 = divinator.iqr( data );
 // result would look something like [ true, false, false, false, true ...]
 ```
 
+<<<<<<< HEAD
 ### zscore
 
 The z-score (also known as Standard Score) is the number of standard deviations above or below the mean for a given
 data point in relation to the rest of the sample. Assuming a normal data distribution, ~ 99.7% of your data should
+=======
+## zscore
+
+The z-score (also known as Standard Score) is the number of standard deviations above or below the mean for a given 
+data point in relation to the rest of the sample. Assuming a normal data distribution, ~ 99.7% of your data should 
+>>>>>>> 45d48a0a9199dc6e6421f07838f402ef3bad8a8f
 fall within 3 standard deviations of the mean. A value other than 3 may be passed as an optional second paramter.
 
 ```js
@@ -137,10 +168,17 @@ let response2 = divinator.zscore( data );
 // result would look something like [ true, false, false, false, true ...]
 ```
 
+<<<<<<< HEAD
 ### modifiedZscore
 
 Similar to z-score, but uses Median Absolute Deviation (MAD) and median for its calculations. The default threshold
 when using modifiedZscore is 3.5. As with the other functions, a value other than the default may be passed as a second
+=======
+## modifiedZscore
+
+Similar to z-score, but uses Median Absolute Deviation (MAD) and median for its calculations. The default threshold 
+when using modifiedZscore is 3.5. As with the other functions, a value other than the default may be passed as a second 
+>>>>>>> 45d48a0a9199dc6e6421f07838f402ef3bad8a8f
 parameter to the function.
 
 ```js
@@ -157,12 +195,21 @@ let response2 = divinator.modifiedZscore( data );
 // result would look something like [ true, false, false, false, true ...]
 ```
 
+<<<<<<< HEAD
 ### all
 
 This utility function will pass your data to all three algorithms and returns a single array of true/false
 values. Values will be _true_ only if all three algorithms agree that the data point in question is a possible
 outlier. Unlike the individual functions, custom parameters are passed as named entities in an option configuration
 object. Any or all of the functions may be included; any functions not referenced in the configuration object will
+=======
+## all
+
+This utility function will pass your data to all three algorithms and returns a single array of true/false 
+values. Values will be _true_ only if all three algorithms agree that the data point in question is a possible 
+outlier. Unlike the individual functions, custom parameters are passed as named entities in an option configuration
+object. Any or all of the functions may be included; any functions not referenced in the configuration object will 
+>>>>>>> 45d48a0a9199dc6e6421f07838f402ef3bad8a8f
 use the default value.
 
 ```js
@@ -179,7 +226,11 @@ let response2 = divinator.all( data );
 // result would look something like [ true, false, false, false, true ...]
 ```
 
+<<<<<<< HEAD
 ### version
+=======
+## version
+>>>>>>> 45d48a0a9199dc6e6421f07838f402ef3bad8a8f
 
 Simply returns the version number of the module.
 
@@ -187,6 +238,7 @@ Simply returns the version number of the module.
 console.log( divinator.version );
 ```
 
+<<<<<<< HEAD
 ### patterns
 
 Identifies patterns within the data that are statistically unlikely.
@@ -398,3 +450,11 @@ Returns:
 
 Any constructive feedback is welcome. If you have JavaScript implementations of other anomaly detection algorithms
 and would like to see them included, please let me know.
+=======
+# Input and Feedback
+
+Any constructive feedback is welcome. If you have JavaScript implementations of other anomaly detection algorithms 
+and would like to see them included, please let me know. (I tried coding Isolation Forest, but after several hours of 
+frustration, I left it out.)
+
+>>>>>>> 45d48a0a9199dc6e6421f07838f402ef3bad8a8f
