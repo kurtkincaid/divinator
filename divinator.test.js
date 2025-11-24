@@ -16,7 +16,7 @@ describe('Divinator - Core Functionality Tests', () => {
 
   describe('Version and Constants', () => {
     test('should export correct version', () => {
-      expect(divinator.version).toBe('3.1.0');
+      expect(divinator.version).toBe('3.2.0');
     });
 
     test('should export mathematical constants', () => {
