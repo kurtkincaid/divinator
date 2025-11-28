@@ -3,13 +3,12 @@
 Robust anomaly detection and statistical toolkit for Node.js: outliers, control-chart rules, normality tests, clustering, Poisson, moving averages, and more.
 
 - Outlier detection: IQR, Z-Score, Modified Z-Score, Grubbs, LOF, consensus via all()
-- Outlier detection: IQR, Z-Score, Modified Z-Score, Grubbs, LOF, consensus via all()
 - **Isolation Forest**: Industry-standard anomaly detection
-	- Classic axis-aligned splits (Liu et al., 2008)
-	- Extended Isolation Forest with random hyperplanes (Hariri et al., 2019)
-	- Deterministic training via seeding
-	- Contamination-based auto-thresholding
-	- Model serialization
+  - Classic axis-aligned splits (Liu et al., 2008)
+  - Extended Isolation Forest with random hyperplanes (Hariri et al., 2019)
+  - Deterministic training via seeding
+  - Contamination-based auto-thresholding
+  - Model serialization
 - Control chart analysis: zone classification and pattern rules
 - Normality tests: Shapiro-Wilk, Kolmogorov-Smirnov, Jarque-Bera, Anderson-Darling, Lilliefors (simulated CVs)
 - Clustering: DBSCAN, OPTICS, k-means
@@ -85,4 +84,3 @@ npm test
 ## License
 
 Apache-2.0. See LICENSE.
-
