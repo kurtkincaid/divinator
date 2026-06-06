@@ -1,21 +1,11 @@
 {
     "name": "divinator",
-<<<<<<< HEAD
-    "version": "1.0.1",
-=======
     "version": "3.1.0",
->>>>>>> development-3.x
     "repository": {
         "type": "git",
         "url": "https://github.com/kurtkincaid/divinator.git"
     },
     "homepage": "https://github.com/kurtkincaid/divinator",
-<<<<<<< HEAD
-    "description": "JavaScript library for bringing multiple outlier/anomaly detection methods together in one place.",
-    "main": "index.js",
-    "scripts": {
-        "test": "jest"
-=======
     "description": "Relatively simple library bringing multiple outlier/anomaly detection algorithms together in one place.",
     "main": "index.js",
     "scripts": {
@@ -23,7 +13,6 @@
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
         "benchmark": "node benchmark.js"
->>>>>>> development-3.x
     },
     "keywords": [
         "anomaly",
@@ -35,10 +24,6 @@
         "iqr",
         "interquartile-range",
         "statistics",
-<<<<<<< HEAD
-        "control-charts",
-        "jarque-bera"
-=======
         "poisson",
         "monte-carlo",
         "control-charts",
@@ -54,28 +39,16 @@
         "k-nearest-neighbor",
         "k-means",
         "local-outlier-factor"
->>>>>>> development-3.x
     ],
     "author": "Kurt Kincaid <kurt.kincaid@gmail.com>",
     "license": "Apache 2.0",
     "dependencies": {
-<<<<<<< HEAD
-        "jstat": "^1.9.6",
-        "simple-statistics": "^7.8.2",
-        "bignumber.js": "^9.0.1"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.9.1",
-        "eslint": "^9.9.1",
-        "globals": "^15.9.0",
-=======
         "bignumber.js": "^9.1.2",
         "jstat": "^1.9.6",
         "simple-statistics": "^7.8.2"
     },
     "devDependencies": {
         "benchmark": "^2.1.4",
->>>>>>> development-3.x
         "jest": "^29.7.0"
     }
 }
