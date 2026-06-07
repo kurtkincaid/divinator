@@ -6,7 +6,8 @@ Divinator is currently a single-file CommonJS module (`index.js`) exporting a br
 
 - Single export surface via `index.js`
 - Implementations grouped by topic: anomaly detection, control-chart rules, normality tests, clustering, distributions, utilities
-- Jest test suite in `divinator.test.js`
+- First modular refactor in progress: `src/utils.js`, `src/cluster-utils.js`, and `src/cluster.js` now house shared math, validation, and clustering helper logic
+- Jest test suite in `tests/divinator.test.js`
 
 ## Target structure (non-breaking)
 

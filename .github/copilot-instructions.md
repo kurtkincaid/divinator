@@ -2,6 +2,10 @@
 
 context-mode MCP tools available. Rules protect context window from flooding. One unrouted command dumps 56 KB into context.
 
+## Environment
+
+This is exclusively a Visual Studio Code environment. Do not use any Claude tools, commands, storage locations, nomenclature, etc. All terms concepts, etc., MUST be adapted to VS Code context.
+
 ## Think in Code — MANDATORY
 
 Analyze/count/filter/compare/search/parse/transform data: **write code** via `ctx_execute(language, code)`, `console.log()` only the answer. Do NOT read raw data into context. PROGRAM the analysis, not COMPUTE it. Pure JavaScript — Node.js built-ins only (`fs`, `path`, `child_process`). `try/catch`, handle `null`/`undefined`. One script replaces ten tool calls.
