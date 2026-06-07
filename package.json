@@ -1,12 +1,12 @@
 {
     "name": "divinator",
-    "version": "3.1.0",
+    "version": "3.4.0-dev-2",
     "repository": {
         "type": "git",
         "url": "https://github.com/kurtkincaid/divinator.git"
     },
     "homepage": "https://github.com/kurtkincaid/divinator",
-    "description": "Relatively simple library bringing multiple outlier/anomaly detection algorithms together in one place.",
+    "description": "Lightweight JavaScript library for statistical outlier and anomaly detection, offering multiple methods, including z-scores, IQR, control charts, normality tests, and isolation forest algorithms.",
     "main": "index.js",
     "scripts": {
         "test": "jest",
