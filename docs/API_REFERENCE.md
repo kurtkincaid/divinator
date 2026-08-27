@@ -4,6 +4,24 @@ This reference summarizes the public API. For each function, we include a short 
 
 Note: All APIs are CommonJS exports from `index.js`. Unless noted, inputs are arrays of numbers and functions return arrays of outlier values.
 
+- [API Reference](#api-reference)
+  - [Version and constants](#version-and-constants)
+  - [Outlier detection](#outlier-detection)
+  - [IsolationForest (Functional API)](#isolationforest-functional-api)
+    - [IsolationForest.train(X, options)](#isolationforesttrainx-options)
+    - [IsolationForest.score(model, X)](#isolationforestscoremodel-x)
+    - [IsolationForest.predict(model, X, options)](#isolationforestpredictmodel-x-options)
+    - [IsolationForest.pathLengths(model, X)](#isolationforestpathlengthsmodel-x)
+    - [IsolationForest.serialize(model) / IsolationForest.deserialize(json)](#isolationforestserializemodel--isolationforestdeserializejson)
+  - [Legacy API (Deprecated)](#legacy-api-deprecated)
+    - [\_IsolationForest (Class)](#_isolationforest-class)
+  - [Control charts and patterns](#control-charts-and-patterns)
+  - [Stats and tests](#stats-and-tests)
+  - [Clustering](#clustering)
+  - [Distributions and utilities](#distributions-and-utilities)
+  - [Error messages](#error-messages)
+  - [Versioning](#versioning)
+
 ## Version and constants
 
 - version: string
@@ -42,6 +60,7 @@ Isolation Forest is an unsupervised anomaly detection algorithm that isolates ou
 Builds an isolation forest from training data.
 
 **Parameters:**
+
 - `X` (Array<Array<number>>): Training data matrix [n_samples × n_features]
 - `options` (Object, optional):
   - `nTrees` (number, default: 100): Number of isolation trees
@@ -55,6 +74,7 @@ Builds an isolation forest from training data.
 **Returns:** Model object
 
 **Example:**
+
 ```javascript
 const divinator = require('divinator');
 const IsolationForest = divinator.IsolationForest;
@@ -76,12 +96,14 @@ const modelExtended = IsolationForest.train(X, {
 Computes anomaly scores for data points.
 
 **Parameters:**
+
 - `model` (Object): Trained model from `train()`
 - `X` (Array<Array<number>> | Array<number>): Data to score
 
 **Returns:** Array<number> or number - Anomaly scores in [0, 1]; higher = more anomalous
 
 **Example:**
+
 ```javascript
 const scores = IsolationForest.score(model, [[2, 3], [100, 100]]);
 console.log(scores); // [0.12, 0.89] - second point is anomaly
@@ -92,6 +114,7 @@ console.log(scores); // [0.12, 0.89] - second point is anomaly
 Classifies points as normal (1) or anomaly (-1).
 
 **Parameters:**
+
 - `model` (Object): Trained model
 - `X` (Array<Array<number>> | Array<number>): Data to classify
 - `options` (Object, optional):
@@ -100,6 +123,7 @@ Classifies points as normal (1) or anomaly (-1).
 **Returns:** Array<number> or number - Labels: 1 (normal), -1 (anomaly)
 
 **Example:**
+
 ```javascript
 const predictions = IsolationForest.predict(model, [[2, 3], [100, 100]]);
 console.log(predictions); // [1, -1]
@@ -110,6 +134,7 @@ console.log(predictions); // [1, -1]
 Diagnostic: returns average path lengths (lower = more anomalous).
 
 **Parameters:**
+
 - `model` (Object): Trained model
 - `X` (Array<Array<number>> | Array<number>): Data to analyze
 
@@ -120,6 +145,7 @@ Diagnostic: returns average path lengths (lower = more anomalous).
 Save and restore models.
 
 **Example:**
+
 ```javascript
 const json = IsolationForest.serialize(model);
 fs.writeFileSync('model.json', json);
@@ -143,6 +169,7 @@ const score = forest.anomalyScore(point);
 ```
 
 **Issues:**
+
 - Incorrect normalization factor
 - Missing path length adjustment for external nodes
 - Sampling with replacement
@@ -151,6 +178,7 @@ const score = forest.anomalyScore(point);
 **Migration Guide:**
 
 Old (deprecated):
+
 ```javascript
 const divinator = require('divinator');
 const forest = new divinator.IsolationForest(100, 10);
@@ -159,6 +187,7 @@ const score = forest.anomalyScore(testPoint);
 ```
 
 New (recommended):
+
 ```javascript
 const divinator = require('divinator');
 const IsolationForest = divinator.IsolationForest;
@@ -171,12 +200,13 @@ const score = IsolationForest.score(model, testPoint);
 ```
 
 **Key Differences:**
+
 1. **Functional vs Class-Based:** No `new` keyword; use `train()` instead of constructor + `fit()`
-2. **Model as Data:** `train()` returns a plain object (model), not a class instance
-3. **Determinism:** New API supports seeding for reproducible results
-4. **Batch Operations:** `score()` and `predict()` accept arrays of points
-5. **Correct Algorithm:** New implementation follows Liu et al. (2008) specification exactly
-6. **Extended Mode:** Optional hyperplane-based splits for high-dimensional data
+1. **Model as Data:** `train()` returns a plain object (model), not a class instance
+1. **Determinism:** New API supports seeding for reproducible results
+1. **Batch Operations:** `score()` and `predict()` accept arrays of points
+1. **Correct Algorithm:** New implementation follows Liu et al. (2008) specification exactly
+1. **Extended Mode:** Optional hyperplane-based splits for high-dimensional data
 
 ---
 

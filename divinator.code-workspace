@@ -1,0 +1,32 @@
+{
+    "folders": [ {
+        "path": "c:\\Users\\klkincgw\\OneDrive - WBA\\Documents\\wispe\\kurt\\workbench\\divinator"
+    } ],
+    "settings": {
+        "chat.mcp.autostart": "newAndOutdated",
+        "git.ignoreLimitWarning": true,
+        "editor.bracketPairColorization.enabled": true,
+        "workbench.colorCustomizations": {
+            "_theme": "Misty Blue",
+            "activityBar.background": "#516A7B",
+            "activityBar.foreground": "#E6EEF4",
+            "titleBar.activeBackground": "#2D3C46",
+            "titleBar.inactiveBackground": "#516A7B",
+            "titleBar.activeForeground": "#F0F6FA",
+            "titleBar.inactiveForeground": "#BAC6CD",
+            "statusBar.background": "#3A4C56",
+            "statusBar.foreground": "#F1F8FB",
+            "editorGroupHeader.tabsBackground": "#516A7B",
+            "button.background": "#617A8B",
+            "button.foreground": "#F0F6FA",
+            "button.hoverBackground": "#718A9B"
+        },
+        "markdownlint.configFile": "c:\\Users\\klkincgw\\OneDrive - WBA\\Documents\\wispe\\kurt\\workbench\\divinator\\.markdownlint.json",
+        "markdown.extension.tableFormatter.enabled": false
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-daw-tca.ado-productivity-copilot"
+        ]
+    }
+}

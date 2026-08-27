@@ -345,11 +345,98 @@ describe( 'Compatibility and Integration Tests', () => {
             'version', 'PI', 'E', 'iqr', 'zscore', 'modifiedZscore',
             'Zone', 'patterns', 'collapse', 'xbar', 'xbar2',
             'shapiroWilk', 'kolmogorovSmirnov', 'jarqueBera',
-            'probability', 'discrete', 'rules', 'ruleProfiles'
+            'probability', 'discrete', 'rules', 'ruleProfiles',
+            'IsolationForest'
         ];
 
         expectedExports.forEach( exportName => {
             expect( divinator[ exportName ] ).toBeDefined();
+        } );
+    } );
+
+    describe( 'IsolationForest Functional API', () => {
+        const trainingData = [
+            [ 1 ],
+            [ 2 ],
+            [ 3 ],
+            [ 100 ]
+        ];
+
+        test( 'should train a model and return expected metadata', () => {
+            const model = divinator.IsolationForest.train( trainingData, {
+                nTrees: 10,
+                sampleSize: 4,
+                seed: 42
+            } );
+
+            expect( model ).toBeDefined();
+            expect( model.trees ).toHaveLength( 10 );
+            expect( model.nFeatures ).toBe( 1 );
+            expect( model.sampleSize ).toBe( 4 );
+            expect( model.c_psi ).toBeGreaterThan( 0 );
+            expect( model.method ).toBe( 'axis' );
+            expect( model.threshold ).toBeNull();
+        } );
+
+        test( 'should score data and give higher anomaly score to the outlier', () => {
+            const model = divinator.IsolationForest.train( trainingData, {
+                nTrees: 20,
+                sampleSize: 4,
+                seed: 123
+            } );
+            const scores = divinator.IsolationForest.score( model, trainingData );
+
+            expect( Array.isArray( scores ) ).toBe( true );
+            expect( scores ).toHaveLength( trainingData.length );
+            expect( scores[ 3 ] ).toBeGreaterThanOrEqual( Math.max( scores[ 0 ], scores[ 1 ], scores[ 2 ] ) );
+        } );
+
+        test( 'should predict anomalies with contamination threshold', () => {
+            const model = divinator.IsolationForest.train( trainingData, {
+                nTrees: 20,
+                sampleSize: 4,
+                seed: 123,
+                contamination: 0.25
+            } );
+            const labels = divinator.IsolationForest.predict( model, trainingData );
+
+            expect( Array.isArray( labels ) ).toBe( true );
+            expect( labels ).toHaveLength( trainingData.length );
+            expect( labels[ 3 ] ).toBe( -1 );
+            expect( labels.slice( 0, 3 ) ).toContain( 1 );
+        } );
+
+        test( 'should serialize and deserialize model correctly', () => {
+            const model = divinator.IsolationForest.train( trainingData, {
+                nTrees: 5,
+                sampleSize: 4,
+                seed: 999
+            } );
+            const json = divinator.IsolationForest.serialize( model );
+            const restored = divinator.IsolationForest.deserialize( json );
+
+            expect( typeof json ).toBe( 'string' );
+            expect( restored ).toBeDefined();
+            expect( restored.nFeatures ).toBe( model.nFeatures );
+            expect( restored.trees.length ).toBe( model.trees.length );
+            expect( restored.method ).toBe( model.method );
+        } );
+
+        test( 'should expose path lengths for points', () => {
+            const model = divinator.IsolationForest.train( trainingData, {
+                nTrees: 10,
+                sampleSize: 4,
+                seed: 42
+            } );
+            const lengths = divinator.IsolationForest.pathLengths( model, [
+                [ 1 ],
+                [ 100 ]
+            ] );
+
+            expect( Array.isArray( lengths ) ).toBe( true );
+            expect( lengths ).toHaveLength( 2 );
+            expect( lengths[ 0 ] ).toBeGreaterThan( 0 );
+            expect( lengths[ 1 ] ).toBeGreaterThan( 0 );
         } );
     } );
 } );

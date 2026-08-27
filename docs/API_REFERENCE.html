@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>API Reference</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;vscode&quot;,&quot;lightModeTheme&quot;:&quot;vscode&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<h1 id="api-reference">API Reference</h1>
+<p>This reference summarizes the public API. For each function, we include a short contract: inputs, outputs, error modes, and notes.</p>
+<p>Note: All APIs are CommonJS exports from <code>index.js</code>. Unless noted, inputs are arrays of numbers and functions return arrays of outlier values.</p>
+<ul>
+<li><a href="#api-reference">API Reference</a>
+<ul>
+<li><a href="#version-and-constants">Version and constants</a></li>
+<li><a href="#outlier-detection">Outlier detection</a></li>
+<li><a href="#isolationforest-functional-api">IsolationForest (Functional API)</a>
+<ul>
+<li><a href="#isolationforesttrainx-options">IsolationForest.train(X, options)</a></li>
+<li><a href="#isolationforestscoremodel-x">IsolationForest.score(model, X)</a></li>
+<li><a href="#isolationforestpredictmodel-x-options">IsolationForest.predict(model, X, options)</a></li>
+<li><a href="#isolationforestpathlengthsmodel-x">IsolationForest.pathLengths(model, X)</a></li>
+<li><a href="#isolationforestserializemodel--isolationforestdeserializejson">IsolationForest.serialize(model) / IsolationForest.deserialize(json)</a></li>
+</ul>
+</li>
+<li><a href="#legacy-api-deprecated">Legacy API (Deprecated)</a>
+<ul>
+<li><a href="#_isolationforest-class">_IsolationForest (Class)</a></li>
+</ul>
+</li>
+<li><a href="#control-charts-and-patterns">Control charts and patterns</a></li>
+<li><a href="#stats-and-tests">Stats and tests</a></li>
+<li><a href="#clustering">Clustering</a></li>
+<li><a href="#distributions-and-utilities">Distributions and utilities</a></li>
+<li><a href="#error-messages">Error messages</a></li>
+<li><a href="#versioning">Versioning</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="version-and-constants">Version and constants</h2>
+<ul>
+<li>version: string</li>
+<li>PI: BigNumber – high precision pi</li>
+<li>E: BigNumber – high precision e</li>
+</ul>
+<h2 id="outlier-detection">Outlier detection</h2>
+<ul>
+<li>
+<p>iqr(data: number[], multiplier=1.5): number[]</p>
+<ul>
+<li>Returns values outside [Q1 - k<em>IQR, Q3 + k</em>IQR].</li>
+<li>Errors: empty or invalid array.</li>
+<li>Notes: sorts data; multiplier coerced to 1.5 if invalid.</li>
+</ul>
+</li>
+<li>
+<p>zscore(data: number[], threshold=3): number[]</p>
+<ul>
+<li>Returns values with |(x-mean)/std| &gt; threshold.</li>
+<li>Errors: invalid threshold; empty/invalid array.</li>
+<li>Edge: std=0 -&gt; returns [].</li>
+</ul>
+</li>
+<li>
+<p>modifiedZscore(data: number[], threshold=3.5): number[]</p>
+<ul>
+<li>|0.6745*(x-median)/MAD| &gt; threshold.</li>
+<li>Errors: invalid threshold; empty/invalid array.</li>
+</ul>
+</li>
+<li>
+<p>grubbsTest(data: number[]): number[]</p>
+<ul>
+<li>Iteratively removes extremes based on critical value.</li>
+<li>Errors: invalid array.</li>
+</ul>
+</li>
+<li>
+<p>localOutlierFactor(data: number[]|number[][], k=3, threshold=1.5): number[]|number[][]</p>
+<ul>
+<li>LOF &gt; threshold considered outlier. 1D auto-promoted to 2D and demoted on return.</li>
+</ul>
+</li>
+<li>
+<p>all(data: number[], opts?): number[]</p>
+<ul>
+<li>opts: { iqr=1.5, zscore=3, modifiedZscore=3.5 }</li>
+<li>Returns values flagged by all three detectors.</li>
+</ul>
+</li>
+</ul>
+<h2 id="isolationforest-functional-api">IsolationForest (Functional API)</h2>
+<p>Isolation Forest is an unsupervised anomaly detection algorithm that isolates outliers by randomly partitioning the feature space. This implementation follows Liu et al. (2008) with optional Extended Isolation Forest support (Hariri et al., 2019).</p>
+<h3 id="isolationforesttrainx-options">IsolationForest.train(X, options)</h3>
+<p>Builds an isolation forest from training data.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>X</code> (Array&lt;Array<number>&gt;): Training data matrix [n_samples × n_features]</li>
+<li><code>options</code> (Object, optional):
+<ul>
+<li><code>nTrees</code> (number, default: 100): Number of isolation trees</li>
+<li><code>sampleSize</code> (number, default: 256): Subsample size per tree</li>
+<li><code>maxDepth</code> (number, default: ceil(log2(sampleSize))): Maximum tree depth</li>
+<li><code>method</code> (string, default: 'axis'): Split method - 'axis' or 'extended'</li>
+<li><code>extensionLevel</code> (number, default: null): Features per hyperplane (Extended mode)</li>
+<li><code>seed</code> (number, default: null): Random seed for reproducibility</li>
+<li><code>contamination</code> (number, default: null): Expected anomaly proportion [0, 0.5]</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns:</strong> Model object</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> divinator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;divinator&#x27;</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">IsolationForest</span> = divinator.<span class="hljs-property">IsolationForest</span>;
+
+<span class="hljs-comment">// Classic mode</span>
+<span class="hljs-keyword">const</span> X = [[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">100</span>, <span class="hljs-number">100</span>]];
+<span class="hljs-keyword">const</span> model = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">train</span>(X, { <span class="hljs-attr">seed</span>: <span class="hljs-number">42</span>, <span class="hljs-attr">nTrees</span>: <span class="hljs-number">100</span> });
+
+<span class="hljs-comment">// Extended mode with contamination threshold</span>
+<span class="hljs-keyword">const</span> modelExtended = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">train</span>(X, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;extended&#x27;</span>,
+    <span class="hljs-attr">seed</span>: <span class="hljs-number">42</span>,
+    <span class="hljs-attr">contamination</span>: <span class="hljs-number">0.1</span>
+});
+</code></pre>
+<h3 id="isolationforestscoremodel-x">IsolationForest.score(model, X)</h3>
+<p>Computes anomaly scores for data points.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>model</code> (Object): Trained model from <code>train()</code></li>
+<li><code>X</code> (Array&lt;Array<number>&gt; | Array<number>): Data to score</li>
+</ul>
+<p><strong>Returns:</strong> Array<number> or number - Anomaly scores in [0, 1]; higher = more anomalous</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> scores = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">score</span>(model, [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">100</span>, <span class="hljs-number">100</span>]]);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(scores); <span class="hljs-comment">// [0.12, 0.89] - second point is anomaly</span>
+</code></pre>
+<h3 id="isolationforestpredictmodel-x-options">IsolationForest.predict(model, X, options)</h3>
+<p>Classifies points as normal (1) or anomaly (-1).</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>model</code> (Object): Trained model</li>
+<li><code>X</code> (Array&lt;Array<number>&gt; | Array<number>): Data to classify</li>
+<li><code>options</code> (Object, optional):
+<ul>
+<li><code>threshold</code> (number): Score threshold; &gt;= threshold is anomaly</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns:</strong> Array<number> or number - Labels: 1 (normal), -1 (anomaly)</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> predictions = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">predict</span>(model, [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">100</span>, <span class="hljs-number">100</span>]]);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(predictions); <span class="hljs-comment">// [1, -1]</span>
+</code></pre>
+<h3 id="isolationforestpathlengthsmodel-x">IsolationForest.pathLengths(model, X)</h3>
+<p>Diagnostic: returns average path lengths (lower = more anomalous).</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>model</code> (Object): Trained model</li>
+<li><code>X</code> (Array&lt;Array<number>&gt; | Array<number>): Data to analyze</li>
+</ul>
+<p><strong>Returns:</strong> Array<number> or number - Average path lengths across trees</p>
+<h3 id="isolationforestserializemodel--isolationforestdeserializejson">IsolationForest.serialize(model) / IsolationForest.deserialize(json)</h3>
+<p>Save and restore models.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> json = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">serialize</span>(model);
+fs.<span class="hljs-title function_">writeFileSync</span>(<span class="hljs-string">&#x27;model.json&#x27;</span>, json);
+
+<span class="hljs-keyword">const</span> restoredModel = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">deserialize</span>(fs.<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;model.json&#x27;</span>, <span class="hljs-string">&#x27;utf8&#x27;</span>));
+</code></pre>
+<hr>
+<h2 id="legacy-api-deprecated">Legacy API (Deprecated)</h2>
+<h3 id="_isolationforest-class">_IsolationForest (Class)</h3>
+<p><strong>Note:</strong> This class-based implementation contains algorithmic deviations from the Liu et al. (2008) specification and will be removed in a future version. Use the functional <code>IsolationForest</code> API instead.</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Legacy usage (not recommended)</span>
+<span class="hljs-keyword">const</span> forest = <span class="hljs-keyword">new</span> divinator.<span class="hljs-title function_">_IsolationForest</span>(numTrees, heightLimit);
+forest.<span class="hljs-title function_">fit</span>(data);
+<span class="hljs-keyword">const</span> score = forest.<span class="hljs-title function_">anomalyScore</span>(point);
+</code></pre>
+<p><strong>Issues:</strong></p>
+<ul>
+<li>Incorrect normalization factor</li>
+<li>Missing path length adjustment for external nodes</li>
+<li>Sampling with replacement</li>
+<li>Non-deterministic (no seeding)</li>
+</ul>
+<p><strong>Migration Guide:</strong></p>
+<p>Old (deprecated):</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> divinator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;divinator&#x27;</span>);
+<span class="hljs-keyword">const</span> forest = <span class="hljs-keyword">new</span> divinator.<span class="hljs-title class_">IsolationForest</span>(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>);
+forest.<span class="hljs-title function_">fit</span>(trainingData);
+<span class="hljs-keyword">const</span> score = forest.<span class="hljs-title function_">anomalyScore</span>(testPoint);
+</code></pre>
+<p>New (recommended):</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> divinator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;divinator&#x27;</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">IsolationForest</span> = divinator.<span class="hljs-property">IsolationForest</span>;
+
+<span class="hljs-keyword">const</span> model = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">train</span>(trainingData, {
+    <span class="hljs-attr">nTrees</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">seed</span>: <span class="hljs-number">42</span>  <span class="hljs-comment">// optional, for reproducibility</span>
+});
+<span class="hljs-keyword">const</span> score = <span class="hljs-title class_">IsolationForest</span>.<span class="hljs-title function_">score</span>(model, testPoint);
+</code></pre>
+<p><strong>Key Differences:</strong></p>
+<ol>
+<li><strong>Functional vs Class-Based:</strong> No <code>new</code> keyword; use <code>train()</code> instead of constructor + <code>fit()</code></li>
+<li><strong>Model as Data:</strong> <code>train()</code> returns a plain object (model), not a class instance</li>
+<li><strong>Determinism:</strong> New API supports seeding for reproducible results</li>
+<li><strong>Batch Operations:</strong> <code>score()</code> and <code>predict()</code> accept arrays of points</li>
+<li><strong>Correct Algorithm:</strong> New implementation follows Liu et al. (2008) specification exactly</li>
+<li><strong>Extended Mode:</strong> Optional hyperplane-based splits for high-dimensional data</li>
+</ol>
+<hr>
+<h2 id="control-charts-and-patterns">Control charts and patterns</h2>
+<ul>
+<li>Zone(data: number[]): Zone
+<ul>
+<li>which(x): 'A'|'B'|'C'|'X'</li>
+<li>zones: 3 bands at 1σ, 2σ, 3σ around mean.</li>
+</ul>
+</li>
+<li>patterns(data: number[]|{data:number[]}, collapse=false)
+<ul>
+<li>Returns stats summary and pattern hits (alpha..hotel), Poisson map, outliers.</li>
+</ul>
+</li>
+<li>collapse(p: object): object
+<ul>
+<li>Collapses arrays of indices into consecutive sequences.</li>
+</ul>
+</li>
+<li>probability, discrete, rules: constants for σ probabilities and rule text.</li>
+</ul>
+<h2 id="stats-and-tests">Stats and tests</h2>
+<ul>
+<li>shapiroWilk(data: number[], alpha=0.05): { testStatistic: number, pValue: number }</li>
+<li>kolmogorovSmirnov(data: number[]): { testStatistic: number, criticalValues: {alpha05:number,alpha10:number,alpha01:number} }</li>
+<li>jarqueBera(data: number[]): { testStatistic: number, pValue: number }</li>
+<li>andersonDarling(data: number[]): { testStatistic: number, pValues: { '0.1': boolean, '0.05': boolean, '0.01': boolean } }</li>
+<li>andersonDarling2(data: number[]): { testStatistic: number, significanceLevel: Record&lt;string, boolean&gt; }</li>
+<li>lilliefors(data: number[]): { testStatistic: number, criticalValues: Record&lt;string, number&gt; }</li>
+</ul>
+<h2 id="clustering">Clustering</h2>
+<ul>
+<li>dbscan(dataset: number[][], eps=2, minPts=2): { clusters: number[][], noise: number[] }</li>
+<li>optics(dataset: number[][], eps=2, minPts=2): { clusters: number[][], noise: number[] }</li>
+<li>kMeans(dataset: number[][], k=3, maxIterations=100): { centroids: number[][], clusters: number[][][] }</li>
+</ul>
+<h2 id="distributions-and-utilities">Distributions and utilities</h2>
+<ul>
+<li>
+<p>poisson(x:number, mean:number, exp?:number): { lte, lt, eq, gt, gte, ne }</p>
+</li>
+<li>
+<p>poissonPdf(x:number, mean:number): BigNumber</p>
+</li>
+<li>
+<p>poissonCdf(x:number, mean:number): BigNumber</p>
+</li>
+<li>
+<p>factorial(z:number|string|BigNumber): BigNumber</p>
+</li>
+<li>
+<p>xbar(arr:number[], { size=5, front=false, d=10 }): number[]</p>
+</li>
+<li>
+<p>xbar2(arr:number[], { size=5, front=false, d=10 }): number[]</p>
+</li>
+<li>
+<p>sequenceAnalysis(arr:any[], clusterSize=4, threshold?): { sequences, partials, threshold, strictDuplicates }</p>
+</li>
+<li>
+<p>partialMatches(clusters:string[], threshold=0.75): Record&lt;string, Record&lt;string, {count:number, coeff:number}&gt;&gt;</p>
+</li>
+<li>
+<p>generateNormalData(mean=0, stdDev=1, quantity=20): number[]</p>
+</li>
+<li>
+<p>generateEvenData(mean=0, range=20, quantity=20): number[]</p>
+</li>
+<li>
+<p>getSecureRandomValue(): number</p>
+</li>
+</ul>
+<h2 id="error-messages">Error messages</h2>
+<ul>
+<li>&quot;Please pass an array of numbers.&quot; – when input is not an array</li>
+<li>&quot;Data array cannot be empty.&quot; – empty arrays</li>
+<li>&quot;Data included something other than numbers…&quot; – non-numeric content</li>
+<li>Threshold/multiplier errors – when passed value cannot be parsed to finite number</li>
+</ul>
+<h2 id="versioning">Versioning</h2>
+<p>Divinator follows SemVer. New functionality in minor versions, breaking changes only in major versions.</p>
+
+            
+            
+        </body>
+        </html>

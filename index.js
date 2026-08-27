@@ -210,7 +210,7 @@ module.exports.zscore = zscore;
  * @param {number} [options.modifiedZscore=3.5] - Modified Z-score threshold.
  * @returns {number[]} An array of outliers detected by all methods.
  */
-function all( data, options = {} ) {
+function consensus( data, options = {} ) {
     // Validate the input data
     const validatedData = validate( data );
 
@@ -236,8 +236,8 @@ function all( data, options = {} ) {
     return consensus;
 }
 
-// Export the `all` function for use in other modules
-module.exports.all = all;
+// Export the `consensus` function for use in other modules
+module.exports.consensus = consensus;
 
 /*
     NOTES:

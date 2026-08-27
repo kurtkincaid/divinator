@@ -1,0 +1,88 @@
+{
+    "default": true,
+    "MD003": {
+        "style": "atx"
+    },
+    "MD004": {
+        "style": "dash"
+    },
+    "MD007": {
+        "indent": 2
+    },
+    "MD009": {
+        "br_spaces": 2,
+        "list_item_empty_lines": false,
+        "strict": false
+    },
+    "MD010": {
+        "code_blocks": true,
+        "spaces_per_tab": 4
+    },
+    "MD012": {
+        "maximum": 2
+    },
+    "MD013": false,
+    "MD022": {
+        "lines_above": 1,
+        "lines_below": 1
+    },
+    "MD024": {
+        "siblings_only": true
+    },
+    "MD025": {
+        "front_matter_title": "^\\s*title\\s*[:=]"
+    },
+    "MD026": {
+        "punctuation": ".,;:!"
+    },
+    "MD029": {
+        "style": "one"
+    },
+    "MD030": {
+        "ul_single": 1,
+        "ol_single": 1,
+        "ul_multi": 1,
+        "ol_multi": 1
+    },
+    "MD033": {
+        "allowed_elements": [
+            "a",
+            "br",
+            "details",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "summary",
+            "img",
+            "kbd",
+            "li",
+            "ol",
+            "sub",
+            "sup",
+            "tt",
+            "ul",
+            "pre",
+            "code",
+            "span",
+            "style",
+            "mark",
+            "strong",
+            "superscript",
+            "number"
+        ]
+    },
+    "MD035": {
+        "style": "---"
+    },
+    "MD036": {
+        "punctuation": ".,;:!?。，；：！？"
+    },
+    "MD040": {
+        "allowed_languages": [],
+        "language_only": false
+    },
+    "MD041": {
+        "level": 1
+    }
+}
